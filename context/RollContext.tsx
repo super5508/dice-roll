@@ -11,7 +11,7 @@ import React, {
 export const DICE_TYPES = [20, 100, 10, 8, 6, 4] as const;
 export type DICE_TYPE = (typeof DICE_TYPES)[number];
 export type IRollHistory = IDiceRollResponse & {
-  createdAt: Date;
+  timestamp: Date;
   isOwn: boolean;
 };
 
@@ -106,7 +106,18 @@ export const RollContextProvider: React.FC<PropsWithChildren> = ({
   }, []);
 
   const addRollHistory = useCallback((newHistory: IRollHistory) => {
-    setRollHistory((prev) => [...prev, newHistory]);
+    setRollHistory((prev) => {
+      let newRollHistory = [...prev];
+      const ownIndex = newRollHistory.findIndex(
+        (p) => p.notation === newHistory.notation
+      );
+      if (ownIndex > -1) {
+        newRollHistory[ownIndex].isOwn = true;
+      } else {
+        newRollHistory = [...newRollHistory, newHistory];
+      }
+      return newRollHistory;
+    });
   }, []);
 
   const value = useMemo(

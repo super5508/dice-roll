@@ -21,6 +21,7 @@ const config: Config = {
           variant: "#49454f",
         },
         primary: "#41deb4",
+        onPrimary: "#00382A",
         onSurface: {
           default: "#fbfcff",
           variant: "#BFC9C3",

@@ -3,7 +3,7 @@ import React from "react";
 import { IRollHistory } from "@/context/RollContext";
 
 export const OwnRollCard: React.FC<IRollHistory> = ({
-  createdAt,
+  timestamp,
   notation,
   results,
 }) => {
@@ -13,7 +13,7 @@ export const OwnRollCard: React.FC<IRollHistory> = ({
   return (
     <div className="max-w-fit ml-auto">
       <p className="mb-1 text-outline-default text-right">
-        {createdAt.toLocaleDateString()}
+        {timestamp.toLocaleDateString()}
       </p>
       <div className="px-4 py-3 rounded-3xl bg-surfaces-500 text-onSurface-variant text-bodyLg">
         <p>/r {notation}</p>
@@ -31,7 +31,7 @@ export const OwnRollCard: React.FC<IRollHistory> = ({
 };
 
 export const RollCard: React.FC<IRollHistory> = ({
-  createdAt,
+  timestamp,
   notation,
   results,
 }) => {
@@ -40,13 +40,13 @@ export const RollCard: React.FC<IRollHistory> = ({
   }, 0);
   return (
     <div className="flex gap-2.5 max-w-fit mr-auto">
-      <div className="bg-primary rounded-full font-bold text-bodyLg w-8 h-8">
+      <div className="bg-primary rounded-full font-bold text-bodyLg w-8 h-8 flex items-center justify-center text-onPrimary">
         G
       </div>
       <div className="p-1 text-onSurface-variant">
         <p>
           <strong className="text-primary">Guest</strong>{" "}
-          {createdAt.toLocaleDateString()}
+          {timestamp.toLocaleDateString()}
         </p>
         <p>/r {notation}</p>
         <p>

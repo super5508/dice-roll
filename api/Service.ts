@@ -1,7 +1,7 @@
 import { DICE_TYPE } from "@/context/RollContext";
 
 const TOKEN_KEY = "_accessToken_";
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+export const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export type IAccessTokenResponse = {
   accessToken: string;
@@ -11,7 +11,9 @@ export const fetchAccessToken = async (useSaved = true) => {
   try {
     const storedToken = window.localStorage.getItem(TOKEN_KEY);
     if (storedToken && useSaved) return;
-    const response = await fetch(`${API_URL}/access-token`, { method: "POST" });
+    const response = await fetch(`${API_URL}/api/access-token`, {
+      method: "POST",
+    });
     const json = (await response.json()) as IAccessTokenResponse;
     window.localStorage.setItem(TOKEN_KEY, json.accessToken);
   } catch {
@@ -37,12 +39,26 @@ export type IDiceRollResponse = {
   sum: number;
 };
 
+export type IDiceRollSocketMessage = {
+  notation: string;
+  results: {
+    type: "dice";
+    count: number;
+    sides: DICE_TYPE;
+    allRolls: number[];
+    keptRolls: number[];
+    total: number;
+  }[];
+  sum: number;
+  timestamp: string;
+};
+
 export const getDiceRolls = async (rollText: string) => {
   try {
     const fetchRoll = async () => {
       const accessToken = window.localStorage.getItem(TOKEN_KEY) ?? "";
       const response = await fetch(
-        `${API_URL}/dice-rolls/${rollText}/?accessToken=${accessToken}&verbose=true`
+        `${API_URL}/api/dice-rolls/${rollText}/?accessToken=${accessToken}&verbose=true`
       );
       return response;
     };

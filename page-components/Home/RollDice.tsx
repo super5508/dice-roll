@@ -46,7 +46,7 @@ export const RollDice: React.FC = () => {
       try {
         const roll = await getDiceRolls(rollInput);
         if (roll) {
-          addRollHistory({ ...roll, isOwn: true, createdAt: new Date() });
+          addRollHistory({ ...roll, isOwn: true, timestamp: new Date() });
         }
       } catch {
         console.error("Failed to get dice roll");
