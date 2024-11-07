@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 
 import { Header } from "@/components/Header";
+import { DefaultLayout } from "@/layouts/Default";
 
 import "./globals.css";
 
@@ -26,7 +27,7 @@ export default function RootLayout({
       <body className={`${lato.className} bg-surfaces-100`}>
         <Header />
         <main className="pb-6 min-h-[calc(100vh-68px)] flex flex-col">
-          {children}
+          <DefaultLayout>{children}</DefaultLayout>
         </main>
       </body>
     </html>

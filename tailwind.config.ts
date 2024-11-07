@@ -4,6 +4,7 @@ const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./page-components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
@@ -17,9 +18,13 @@ const config: Config = {
         },
         outline: {
           default: "#89938d",
+          variant: "#49454f",
         },
         primary: "#41deb4",
-        onSurface: "#fbfcff",
+        onSurface: {
+          default: "#fbfcff",
+          variant: "#BFC9C3",
+        },
       },
       fontSize: {
         displayLg: "3.5625em",

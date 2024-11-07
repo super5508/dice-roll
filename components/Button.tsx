@@ -25,8 +25,9 @@ export const Button: React.FC<ButtonProps> = ({
   return (
     <button
       className={clsx(
-        "py-[10px] px-4 text-center rounded-[4px] border border-outline-default text-primary font-bold transition-all",
-        { "text-onSurface text-opacity-35 border-onSurface/15": disabled },
+        "py-[10px] px-4 text-center rounded-[4px] border text-primary font-bold transition-all",
+        { "text-onSurface-default text-opacity-35 ": disabled },
+        disabled ? "border-onSurface-default/15" : "border-outline-default",
         textSize[size],
         { "w-full": fullWidth },
         className

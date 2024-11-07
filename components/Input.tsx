@@ -3,11 +3,13 @@ import clsx from "classnames";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   iconBefore?: React.ReactNode;
+  addon?: React.ReactNode;
 }
 
 export const Input: React.FC<InputProps> = ({
   iconBefore,
   className,
+  addon,
   ...props
 }) => {
   const hasIconBefore = !!iconBefore;
@@ -19,9 +21,10 @@ export const Input: React.FC<InputProps> = ({
       )}
     >
       {iconBefore && iconBefore}
+      {addon && <span className="text-outline-default block">{addon}</span>}
       <input
         className={clsx(
-          "h-10 text-bodyLg bg-transparent outline-0 border-none w-full",
+          "h-10 text-bodyLg bg-transparent outline-0 border-none w-full placeholder:text-outline-default text-onSurface-default",
           className
         )}
         {...props}
