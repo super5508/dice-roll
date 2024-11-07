@@ -45,26 +45,38 @@ const IndexPage: React.FC<NextPage> = () => {
   }, []);
 
   return (
-    <div className="flex-1 max-w-[480px] mx-auto flex flex-col">
-      <div className="flex-1 space-y-3">
-        {rollHistory.map((history, index) =>
-          history.isOwn ? (
-            <OwnRollCard key={index} {...history} />
-          ) : (
-            <RollCard key={index} {...history} />
-          )
-        )}
-      </div>
+    <div className="flex-1 flex flex-col">
+      {rollHistory.length === 0 && (
+        <div className="flex-1 flex gap-4 justify-center items-center">
+          {new Array(3).fill("").map((_, index) => (
+            <div
+              className="border-outline-variant rounded-2xl w-[240px] h-[160px] border"
+              key={index}
+            />
+          ))}
+        </div>
+      )}
+      <div className="max-w-[480px] mx-auto flex flex-col flex-grow overflow-y-auto">
+        <div className="flex-1 space-y-3">
+          {rollHistory.map((history, index) =>
+            history.isOwn ? (
+              <OwnRollCard key={index} {...history} />
+            ) : (
+              <RollCard key={index} {...history} />
+            )
+          )}
+        </div>
 
-      <div className="w-[480px]">
-        <Input
-          placeholder="2d20kh1+1d4+5"
-          iconBefore={<RollDice />}
-          className="w-[480px]"
-          value={rollInput}
-          addon="/r"
-          onChange={(e) => setRollInput(e.target.value)}
-        />
+        <div className="w-[480px] mt-8">
+          <Input
+            placeholder="2d20kh1+1d4+5"
+            iconBefore={<RollDice />}
+            className="w-[480px]"
+            value={rollInput}
+            addon="/r"
+            onChange={(e) => setRollInput(e.target.value)}
+          />
+        </div>
       </div>
     </div>
   );
